@@ -56,11 +56,9 @@ import AccountTrackOrder from './pages/account/AccountTrackOrder';
 import AccountWishlist from './pages/account/AccountWishlist';
 import AccountSettings from './pages/account/AccountSettings';
 
-// Admin Auth Pages
-import AdminLogin from './pages/admin/AdminLogin';
-import AdminSignup from './pages/admin/AdminSignup';
-
 // Admin Pages
+import AdminLogin from './pages/admin/AdminLogin'; 
+import AdminSignup from './pages/admin/AdminSignup';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
 import AdminProducts from './pages/admin/AdminProducts';
@@ -69,6 +67,8 @@ import AdminCustomers from "./pages/admin/AdminCustomers";
 import AdminMarketing from './pages/admin/AdminMarketing';
 import AdminLookbook from './pages/admin/AdminLookbook';
 import AdminFinance from './pages/admin/AdminFinance';
+import AdminTeam from './pages/admin/AdminTeam';
+import AdminMessages from './pages/admin/AdminMessages';
 
 // Collections Pages
 import CollectionsPage from './pages/collections/CollectionsPage';
@@ -110,8 +110,10 @@ function App() {
                   <Route path="orders" element={<AdminOrders />} />
                   <Route path="inventory" element={<AdminInventory />} />
                   <Route path="customers" element={<AdminCustomers />} />
+                  <Route path="messages" element={<AdminMessages />} />
                   <Route path="marketing" element={<AdminMarketing />} />
                   <Route path="finance" element={<AdminFinance />} />
+                  <Route path="team" element={<AdminTeam />} />
                   <Route path="settings" element={<div style={{ padding: '2rem' }}>Settings - Coming Soon</div>} />
                 </Route>
 
@@ -124,7 +126,6 @@ function App() {
                     <Navbar />
                     <main style={{ minHeight: '60vh' }}>
                       <Routes>
-                        {/* Static Pages */}
                         <Route path="/" element={<Home />} />
                         <Route path="/shop" element={<ShopPage />} />
                         <Route path="/about" element={<AboutPage />} />
@@ -135,11 +136,9 @@ function App() {
                         <Route path="/track-order" element={<TrackOrderPage />} />
                         <Route path="/search" element={<SearchPage />} />
 
-                        {/* Customer Auth Pages */}
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/signup" element={<SignupPage />} />
 
-                        {/* Help Center & Policies */}
                         <Route path="/help" element={<HelpPage />} />
                         <Route path="/faq" element={<FAQPage />} />
                         <Route path="/returns" element={<ReturnsPage />} />
@@ -148,7 +147,6 @@ function App() {
                         <Route path="/terms" element={<PolicyPage />} />
                         <Route path="/careers" element={<PolicyPage />} />
 
-                        {/* Account Dashboard */}
                         <Route 
                           path="/account" 
                           element={
@@ -167,7 +165,6 @@ function App() {
                           <Route path="settings" element={<AccountSettings />} />
                         </Route>
 
-                        {/* Shop & Category Pages */}
                         <Route path="/shop/all" element={<GenderLandingPage genderOverride="all" />} />
                         <Route path="/shop/accessories" element={<GenderLandingPage genderOverride="accessories" />} />
                         <Route path="/shop/shoes" element={<GenderLandingPage genderOverride="shoes" />} />
@@ -175,16 +172,13 @@ function App() {
                         <Route path="/shop/new-arrivals" element={<GenderLandingPage genderOverride="new-arrivals" />} />
                         <Route path="/shop/best-sellers" element={<GenderLandingPage genderOverride="best-sellers" />} />
 
-                        {/* Collections */}
                         <Route path="/collections" element={<CollectionsPage />} />
                         <Route path="/collections/:slug" element={<CollectionDetailsPage />} />
 
-                        {/* Dynamic Product Routes */}
                         <Route path="/shop/:gender" element={<GenderLandingPage />} />
                         <Route path="/shop/:gender/:category" element={<CategoryListingPage />} />
                         <Route path="/product/:slug" element={<ProductDetailsPage />} />
 
-                        {/* 404 Fallback */}
                         <Route path="*" element={<div style={{ padding: '4rem', textAlign: 'center' }}>404 - Page Not Found</div>} />
                       </Routes>
                     </main>

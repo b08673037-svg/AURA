@@ -9,7 +9,6 @@ import {
 } from "react-icons/fi";
 import "./AdminDashboard.css";
 
-// Formatting helpers
 const currency = (value) =>
   new Intl.NumberFormat("en-PK", {
     style: "currency",
@@ -25,7 +24,6 @@ const formatCompactPKR = (value) => {
   return `Rs. ${amount.toFixed(0)}`;
 };
 
-// Date helpers
 const getDate = (value) => {
   if (!value) return null;
   if (typeof value === "number") return new Date(value < 1e12 ? value * 1000 : value);
@@ -73,7 +71,7 @@ const getInitials = (name = "Customer") =>
   String(name).split(" ").filter(Boolean).slice(0, 2).map((p) => p[0]).join("").toUpperCase();
 
 /* =========================================
-   UPGRADED REVENUE CHART
+   PROFESSIONAL BAR CHART
 ========================================= */
 const RevenueChart = ({ data }) => {
   const width = 700;
@@ -86,41 +84,14 @@ const RevenueChart = ({ data }) => {
   const chartWidth = width - paddingLeft - paddingRight;
   const chartHeight = height - paddingTop - paddingBottom;
 
-  // Find maximum value for Y-axis scaling (min 10k so it doesn't look flat when empty)
   const maxValue = Math.max(...data.map((d) => d.value), 10000);
-  // Round max up to a nice number (e.g., 50k, 100k)
   const stepValue = Math.ceil(maxValue / 4);
   const yAxisMax = stepValue * 4;
 
-  const points = data.map((item, index) => {
-    const x = paddingLeft + (index * chartWidth) / Math.max(data.length - 1, 1);
-    const y = height - paddingBottom - (item.value / yAxisMax) * chartHeight;
-    return { x, y, ...item };
-  });
+  // Calculate bar width dynamically based on how many months we have
+  const barWidth = Math.min((chartWidth / data.length) * 0.4, 60);
+  const barSpacing = (chartWidth - (barWidth * data.length)) / (data.length + 1);
 
-  // Create a smooth bezier curve path for a premium look
-  let linePath = "";
-  let areaPath = "";
-
-  if (points.length > 0) {
-    linePath = `M ${points[0].x} ${points[0].y}`;
-    
-    for (let i = 0; i < points.length - 1; i++) {
-      const p0 = points[i];
-      const p1 = points[i + 1];
-      // Control points for smooth curve
-      const cp1x = p0.x + (p1.x - p0.x) / 2;
-      const cp1y = p0.y;
-      const cp2x = p0.x + (p1.x - p0.x) / 2;
-      const cp2y = p1.y;
-      linePath += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p1.x} ${p1.y}`;
-    }
-
-    // Close the path for the gradient area fill
-    areaPath = `${linePath} L ${points[points.length - 1].x} ${height - paddingBottom} L ${points[0].x} ${height - paddingBottom} Z`;
-  }
-
-  // Y-axis labels (4 steps)
   const yLabels = Array.from({ length: 5 }, (_, i) => {
     const value = stepValue * (4 - i);
     const y = paddingTop + (i * chartHeight) / 4;
@@ -131,83 +102,66 @@ const RevenueChart = ({ data }) => {
     <div className="revenue-chart" style={{ position: "relative", width: "100%", height: "230px" }}>
       <svg viewBox={`0 0 ${width} ${height}`} width="100%" height="100%" preserveAspectRatio="none" style={{ overflow: "visible" }}>
         <defs>
-          <linearGradient id="auraRevenueFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#873b4c" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#873b4c" stopOpacity="0" />
+          <linearGradient id="auraBarFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#873b4c" stopOpacity="1" />
+            <stop offset="100%" stopColor="#873b4c" stopOpacity="0.6" />
           </linearGradient>
         </defs>
 
-        {/* Horizontal Grid Lines & Y-Axis Labels */}
+        {/* Draw Horizontal Grid Lines & Labels */}
         {yLabels.map((label, i) => (
           <g key={i}>
-            <line
-              x1={paddingLeft}
-              x2={width - paddingRight}
-              y1={label.y}
-              y2={label.y}
-              stroke="#eee9e7"
-              strokeDasharray="4 5"
-            />
-            <text
-              x={paddingLeft - 10}
-              y={label.y + 3}
-              textAnchor="end"
-              fill="#9a9096"
-              fontSize="10"
-              fontFamily="DM Sans, sans-serif"
-            >
+            <line x1={paddingLeft} x2={width - paddingRight} y1={label.y} y2={label.y} stroke="#eee9e7" strokeDasharray="4 5" />
+            <text x={paddingLeft - 10} y={label.y + 3} textAnchor="end" fill="#9a9096" fontSize="10" fontFamily="DM Sans, sans-serif">
               {formatCompactPKR(label.value)}
             </text>
           </g>
         ))}
 
-        {/* The Area & Line */}
-        {points.length > 0 && (
-          <>
-            <path d={areaPath} fill="url(#auraRevenueFill)" />
-            <path
-              d={linePath}
-              fill="none"
-              stroke="#873b4c"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </>
-        )}
+        {/* Draw Bars */}
+        {data.map((item, index) => {
+          const barHeight = (item.value / yAxisMax) * chartHeight;
+          const x = paddingLeft + barSpacing + index * (barWidth + barSpacing);
+          const y = height - paddingBottom - barHeight;
 
-        {/* Data Points (Circles) */}
-        {points.map((p) => (
-          <g key={p.label} className="chart-point-group">
-            <circle
-              cx={p.x}
-              cy={p.y}
-              r="5"
-              fill="#fff"
-              stroke="#873b4c"
-              strokeWidth="2.5"
-              style={{ transition: "r 0.2s ease" }}
-            />
-            <title>{`${p.label}: ${currency(p.value)}`}</title>
-          </g>
-        ))}
+          return (
+            <g key={item.label} className="chart-bar-group">
+              {item.value > 0 && (
+                <rect 
+                  x={x} 
+                  y={y} 
+                  width={barWidth} 
+                  height={barHeight} 
+                  fill="url(#auraBarFill)" 
+                  rx="4" 
+                  style={{ transition: "height 0.5s ease, y 0.5s ease" }}
+                />
+              )}
+            </g>
+          );
+        })}
       </svg>
 
-      {/* X-axis Labels (Months) - Positioned below the SVG */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          paddingLeft: `${(paddingLeft / width) * 100}%`,
-          paddingRight: `${(paddingRight / width) * 100}%`,
-          marginTop: "5px",
-          color: "#9c9399",
-          fontSize: "10px",
-          fontFamily: "DM Sans, sans-serif",
-        }}
-      >
+      {/* X-Axis Labels */}
+      <div style={{ 
+        display: "flex", 
+        paddingLeft: `${(paddingLeft / width) * 100}%`, 
+        paddingRight: `${(paddingRight / width) * 100}%`, 
+        marginTop: "5px", 
+        color: "#9c9399", 
+        fontSize: "10px", 
+        fontFamily: "DM Sans, sans-serif" 
+      }}>
         {data.map((item) => (
-          <span key={item.label}>{item.label}</span>
+          <span key={item.label} style={{ 
+            flex: 1, 
+            textAlign: "center",
+            // Approximate positioning to match the SVG bars
+            paddingLeft: `${(barSpacing / 2 / (barWidth + barSpacing)) * 100}%`,
+            paddingRight: `${(barSpacing / 2 / (barWidth + barSpacing)) * 100}%`
+          }}>
+            {item.label}
+          </span>
         ))}
       </div>
     </div>
@@ -250,12 +204,10 @@ const DonutChart = ({ data, totalItems, totalOrders }) => {
           <span>{totalOrders === 1 ? "Order" : "Orders"}</span>
         </div>
       </div>
-
       <div className="donut-orders-line">
         <span>Slices represent</span>
         <strong>{totalItems.toLocaleString()} items</strong>
       </div>
-
       <div className="donut-legend">
         {segments.map((item) => (
           <div className="legend-row" key={item.name}>
@@ -354,20 +306,28 @@ const AdminDashboard = () => {
     const allTimeOrderCount = validOrders.length;
     const allTimeRevenue = validOrders.filter(isRevenueOrder).reduce((s, o) => s + o._total, 0);
 
-    // Revenue chart - last 6 calendar months
-    const revenueByMonth = Array.from({ length: 6 }, (_, i) => {
-      const date = new Date(now.getFullYear(), now.getMonth() - 5 + i, 1);
-      const key = getMonthKey(date);
-      const value = validOrders
-        .filter((o) => o._date && getMonthKey(o._date) === key && isRevenueOrder(o))
-        .reduce((s, o) => s + o._total, 0);
-      return { label: monthNames[date.getMonth()], value };
-    });
+    // Build chart data (up to 6 most recent months that have data)
+    const allRevenueMonths = validOrders
+      .filter((o) => o._date && isRevenueOrder(o))
+      .reduce((acc, order) => {
+        const key = getMonthKey(order._date);
+        if (!acc[key]) {
+          acc[key] = { label: monthNames[order._date.getMonth()], value: 0, sortKey: order._date.getTime() };
+        }
+        acc[key].value += order._total;
+        return acc;
+      }, {});
+
+    const sortedMonths = Object.values(allRevenueMonths)
+      .sort((a, b) => a.sortKey - b.sortKey)
+      .slice(-6); // Keep only last 6 months with data
+
+    let revenueByMonth = sortedMonths.length > 0 ? sortedMonths : [{ label: monthNames[now.getMonth()], value: 0 }];
 
     const categoryTotals = {};
     periodRevenueOrders.forEach((order) => {
       order._items.forEach((item) => {
-        const category = item.category || "Uncategorized";
+        const category = item.category || "General Products";
         categoryTotals[category] = (categoryTotals[category] || 0) + Number(item.quantity || 1);
       });
     });
@@ -486,7 +446,7 @@ const AdminDashboard = () => {
     return (
       <div className="dashboard-loading">
         <div className="loading-spinner" />
-        <p>Preparing your AURA business overview...</p>
+        <p>Preparing your SHOPZEE business overview...</p>
       </div>
     );
   }
@@ -495,7 +455,7 @@ const AdminDashboard = () => {
     <div className="aura-dashboard">
       <section className="dashboard-welcome">
         <div>
-          <span className="eyebrow">AURA COMMERCE INTELLIGENCE</span>
+          <span className="eyebrow">SHOPZEE COMMERCE INTELLIGENCE</span>
           <h1>Welcome to your command center<span>.</span></h1>
           <p>Your store performance, customer activity and business insights in one place.</p>
         </div>
@@ -568,7 +528,7 @@ const AdminDashboard = () => {
           
           <div className="chart-footnote">
             <span><i className="chart-legend-dot" /> Monthly revenue</span>
-            <span>Last 6 calendar months</span>
+            <span>Trend overview</span>
           </div>
         </article>
 
@@ -731,7 +691,7 @@ const AdminDashboard = () => {
       </section>
 
       <footer className="dashboard-footer">
-        <span>AURA · Luxury Commerce Intelligence</span>
+        <span>SHOPZEE · Luxury Commerce Intelligence</span>
         <span><FiRefreshCw /> Live database connection</span>
       </footer>
 

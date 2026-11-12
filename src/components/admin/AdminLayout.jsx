@@ -4,48 +4,15 @@ import {
   FiHome, FiBarChart2, FiShoppingBag, FiUsers, FiBox,
   FiTag, FiDollarSign, FiSettings, FiLogOut, FiSearch,
   FiBell, FiMenu, FiX, FiChevronLeft, FiChevronRight,
-  FiCommand, FiArrowUpRight, FiImage
+  FiCommand, FiArrowUpRight, FiImage, FiMail, FiUserPlus
 } from "react-icons/fi";
 import { useAuth } from "../../context/AuthContext";
 import toast from "react-hot-toast";
 import "./AdminLayout.css";
 
-const navGroups = [
-  {
-    title: "OVERVIEW",
-    items: [
-      { path: "/admin/dashboard", label: "Dashboard", icon: <FiHome /> },
-      { path: "/admin/analytics", label: "Sales Analytics", icon: <FiBarChart2 /> }
-    ]
-  },
-  {
-    title: "COMMERCE",
-    items: [
-      { path: "/admin/products", label: "Products", icon: <FiShoppingBag /> },
-      { path: "/admin/lookbooks", label: "Shop The Look", icon: <FiImage /> },
-      { path: "/admin/orders", label: "Order Management", icon: <FiBox /> },
-      { path: "/admin/inventory", label: "Inventory", icon: <FiTag /> }
-    ]
-  },
-  {
-    title: "CUSTOMER & BUSINESS",
-    items: [
-      { path: "/admin/customers", label: "Customers", icon: <FiUsers /> },
-      { path: "/admin/marketing", label: "Marketing", icon: <FiArrowUpRight /> },
-      { path: "/admin/finance", label: "Financial Reports", icon: <FiDollarSign /> }
-    ]
-  },
-  {
-    title: "PREFERENCES",
-    items: [
-      { path: "/admin/settings", label: "Settings", icon: <FiSettings /> }
-    ]
-  }
-];
-
 const AdminLayout = () => {
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { logout, userRole } = useAuth();
 
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -55,11 +22,52 @@ const AdminLayout = () => {
     try {
       await logout();
       toast.success("Successfully signed out");
-      navigate("/");
+      navigate("/admin/login");
     } catch (error) {
       toast.error("Unable to sign out. Please try again.");
     }
   };
+
+  const isCashier = userRole === "cashier";
+
+  // Define navigation based on Role
+  const navGroups = [
+    {
+      title: "OVERVIEW",
+      items: [
+        { path: "/admin/dashboard", label: "Dashboard", icon: <FiHome /> },
+        ...(!isCashier ? [{ path: "/admin/analytics", label: "Sales Analytics", icon: <FiBarChart2 /> }] : [])
+      ]
+    },
+    {
+      title: "COMMERCE",
+      items: [
+        { path: "/admin/products", label: "Products", icon: <FiShoppingBag /> },
+        { path: "/admin/lookbooks", label: "Shop The Look", icon: <FiImage /> },
+        { path: "/admin/orders", label: "Order Management", icon: <FiBox /> },
+        { path: "/admin/inventory", label: "Inventory", icon: <FiTag /> }
+      ]
+    },
+    {
+      title: "CUSTOMER & BUSINESS",
+      items: [
+        { path: "/admin/customers", label: "Customers", icon: <FiUsers /> },
+        { path: "/admin/messages", label: "Messages", icon: <FiMail /> },
+        // Only show these if NOT a cashier
+        ...(!isCashier ? [
+          { path: "/admin/marketing", label: "Marketing", icon: <FiArrowUpRight /> },
+          { path: "/admin/finance", label: "Financial Reports", icon: <FiDollarSign /> },
+          { path: "/admin/team", label: "Team Management", icon: <FiUserPlus /> }
+        ] : [])
+      ]
+    },
+    {
+      title: "PREFERENCES",
+      items: [
+        { path: "/admin/settings", label: "Settings", icon: <FiSettings /> }
+      ]
+    }
+  ];
 
   return (
     <div className={`admin-layout ${collapsed ? "sidebar-collapsed" : ""}`}>
@@ -73,7 +81,6 @@ const AdminLayout = () => {
       )}
 
       <aside className={`admin-sidebar ${mobileOpen ? "mobile-open" : ""}`}>
-
         <div className="sidebar-header">
           <div className="admin-brand">
             <h2>AURA<span>.</span></h2>
@@ -102,7 +109,7 @@ const AdminLayout = () => {
           {!collapsed && (
             <div>
               <strong>AURA Store</strong>
-              <span>Online storefront</span>
+              <span>{isCashier ? "Cashier Portal" : "Admin Console"}</span>
             </div>
           )}
           {!collapsed && <span className="store-status" />}
@@ -154,7 +161,6 @@ const AdminLayout = () => {
       </aside>
 
       <div className="admin-main">
-
         <header className="admin-topbar">
           <div className="topbar-left">
             <button
@@ -198,10 +204,10 @@ const AdminLayout = () => {
             </button>
 
             <div className="topbar-profile">
-              <div className="profile-avatar">A</div>
+              <div className="profile-avatar">{isCashier ? "C" : "A"}</div>
               <div className="profile-details">
-                <strong>Administrator</strong>
-                <span>Store Management</span>
+                <strong>{isCashier ? "Cashier" : "Administrator"}</strong>
+                <span>{isCashier ? "Order Processing" : "Store Management"}</span>
               </div>
             </div>
           </div>

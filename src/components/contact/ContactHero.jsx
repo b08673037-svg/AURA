@@ -1,56 +1,159 @@
-import { FiArrowRight } from 'react-icons/fi';
+import { useState } from 'react';
+import { FiMail, FiPhone, FiClock, FiInstagram, FiFacebook, FiArrowRight } from 'react-icons/fi';
+import { FaPinterestP } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import './ContactHero.css';
+import { ref, push, set } from 'firebase/database'; // <-- IMPORT FIREBASE
+import { db } from '../../services/firebase'; // <-- IMPORT DB
+import { contactConfig } from '../../data/contactConfig';
+import toast from 'react-hot-toast';
+import './ContactMain.css';
 
-const ContactHero = () => {
+const ContactMain = () => {
+  const [formData, setFormData] = useState({
+    firstName: '', lastName: '', email: '', phone: '', inquiryType: 'General Inquiry', orderNumber: '', message: ''
+  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+
+    try {
+      // Save to Firebase Realtime Database
+      const messagesRef = ref(db, 'contactMessages');
+      const newMessageRef = push(messagesRef);
+      
+      await set(newMessageRef, {
+        ...formData,
+        createdAt: new Date().toISOString(),
+        status: 'Unread'
+      });
+
+      toast.success("Message sent successfully! We'll be in touch soon.");
+      
+      // Clear form
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', inquiryType: 'General Inquiry', orderNumber: '', message: '' });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   return (
-    <section className="contact-hero">
-      <div className="contact-hero-content">
-        <motion.span 
-          className="contact-eyebrow"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          AURA CUSTOMER CARE
-        </motion.span>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          We'd Love to<br />Hear From You.
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-        >
-          Whether you have a question about an order, need help finding the perfect piece, or simply want to connect with us, we're here to make your AURA experience exceptional.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <a href="#contact-form" className="btn-primary">
-            Get In Touch <FiArrowRight />
-          </a>
-        </motion.div>
-      </div>
+    <section className="contact-main-section" id="contact-form">
+      <div className="contact-main-container">
+        
+        {/* LEFT: Contact Info */}
+        <motion.div className="contact-info-col" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <span className="contact-eyebrow">LET'S CONNECT</span>
+          <h2>We're Here to Help.</h2>
+          <p className="info-desc">At SHOPZEE, every customer matters. Our team is here to assist you with your shopping experience and answer any questions you may have.</p>
 
-      <motion.div 
-        className="contact-hero-image"
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1200&auto=format&fit=crop" 
-          alt="Contact AURA" 
-        />
-      </motion.div>
+          <div className="info-blocks">
+            <div className="info-block">
+              <FiMail className="info-icon" />
+              <div>
+                <span className="info-label">Email Support</span>
+                <a href={`mailto:${contactConfig.email}`} className="info-value">{contactConfig.email}</a>
+              </div>
+            </div>
+
+            <div className="info-block">
+              <FiPhone className="info-icon" />
+              <div>
+                <span className="info-label">Phone Support</span>
+                <a href={`tel:${contactConfig.phone}`} className="info-value">{contactConfig.phone}</a>
+              </div>
+            </div>
+
+            <div className="info-block">
+              <FiClock className="info-icon" />
+              <div>
+                <span className="info-label">Hours</span>
+                <span className="info-value">{contactConfig.hours}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="contact-socials">
+            <span className="info-label">Follow Us</span>
+            <div className="social-icons">
+              <a href="https://instagram.com" target="_blank" rel="noreferrer"><FiInstagram /></a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer"><FiFacebook /></a>
+              <a href="https://pinterest.com" target="_blank" rel="noreferrer"><FaPinterestP /></a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* RIGHT: Form */}
+        <motion.div className="contact-form-col" initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+          <div className="form-header">
+            <h3>Send Us a Message</h3>
+            <p>Have a question? We'd love to hear from you.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="premium-contact-form">
+            <div className="form-row">
+              <div className="form-group">
+                <label>First Name</label>
+                <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label>Last Name</label>
+                <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+              </div>
+              <div className="form-group">
+                <label>Phone (Optional)</label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} />
+              </div>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>Inquiry Type</label>
+                <select name="inquiryType" value={formData.inquiryType} onChange={handleChange}>
+                  <option>General Inquiry</option>
+                  <option>Order Assistance</option>
+                  <option>Shipping & Delivery</option>
+                  <option>Returns & Exchanges</option>
+                  <option>Product Information</option>
+                  <option>Payment Assistance</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Order Number (Optional)</label>
+                <input type="text" name="orderNumber" value={formData.orderNumber} onChange={handleChange} placeholder="#SHOPZEE-12345" />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>Message</label>
+              <textarea name="message" rows="4" value={formData.message} onChange={handleChange} required></textarea>
+            </div>
+
+            <button type="submit" className="btn-primary submit-btn" disabled={isLoading}>
+              {isLoading ? "Sending..." : "Send Message"} 
+              {!isLoading && <FiArrowRight />}
+            </button>
+          </form>
+        </motion.div>
+
+      </div>
     </section>
   );
 };
 
-export default ContactHero;
+export default ContactMain;
