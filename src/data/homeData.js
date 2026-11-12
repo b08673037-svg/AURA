@@ -67,7 +67,7 @@ export const collectionsData = {
   men: {
     title: "Men's Collection",
     subtitle: "Modern Essentials. Timeless Appeal.",
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=800&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1587715363857-65fcecee8fa1?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
     link: "/shop/men", // This makes the Shop Now button work
   },
   women: {
