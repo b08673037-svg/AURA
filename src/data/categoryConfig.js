@@ -19,7 +19,7 @@ export const categoryConfig = {
     title: "The Modern Gentleman",
     eyebrow: "THE AURA MEN'S EDIT",
     description: "Discover refined essentials, contemporary silhouettes, and timeless pieces designed for everyday confidence.",
-    image: "https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?q=80&w=1200&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1741709845827-8f6923d1850e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
     subcategories: [
       { name: "Shirts", slug: "shirts" },
       { name: "T-Shirts", slug: "t-shirts" },
