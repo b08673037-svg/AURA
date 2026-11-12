@@ -1,0 +1,268 @@
+.auth-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-ivory);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-container {
+  max-width: 1100px;
+  width: 100%;
+  display: flex;
+  background-color: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+  min-height: 700px;
+}
+
+/* IMAGE SIDE */
+.auth-image-side {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auth-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 50%);
+  display: flex;
+  align-items: flex-end;
+  padding: 4rem;
+}
+
+.auth-image-overlay h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+/* FORM SIDE */
+.auth-form-side {
+  flex: 1;
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 3rem;
+  letter-spacing: 2px;
+}
+
+.auth-form-wrapper h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--text-charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.auth-form-wrapper p {
+  font-family: var(--font-body);
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* FORM */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.auth-form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.auth-form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-form-group label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+}
+
+.auth-form-group input {
+  width: 100%;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+  padding: 0.8rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.auth-form-group input:focus {
+  border-color: var(--accent-burgundy);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* FOOTER LINKS */
+.auth-footer-links {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.auth-footer-links p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.auth-footer-links a {
+  color: var(--accent-burgundy);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-link {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #888;
+  text-decoration: underline;
+}
+
+/* PASSWORD INPUT WITH EYE ICON */
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem; /* Make room for the icon */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.8rem;
+  background: transparent;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: var(--accent-burgundy);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .auth-container {
+    flex-direction: column;
+    min-height: auto;
+  }
+  .auth-image-side {
+    height: 300px;
+    flex: none;
+  }
+  .auth-image-overlay {
+    padding: 2rem;
+  }
+  .auth-image-overlay h2 {
+    font-size: 2rem;
+  }
+  .auth-form-side {
+    padding: 3rem 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-row { flex-direction: column; }
+  .auth-form-wrapper h1 { font-size: 2rem; }
+}
+
+
+/* ... existing styles ... */
+
+/* OTP INPUT STYLES */
+.otp-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.otp-input-container {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+}
+
+.otp-input {
+  width: 50px;
+  height: 60px;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--text-charcoal);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--bg-ivory);
+}
+
+.otp-input:focus {
+  border-color: var(--accent-burgundy);
+  box-shadow: 0 0 0 2px rgba(135, 59, 76, 0.1);
+}
+
+@media (max-width: 480px) {
+  .otp-input {
+    width: 40px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+  .otp-input-container {
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,180 @@
+.newsletter-section {
+  display: flex;
+  background-color: var(--bg-ivory);
+  min-height: 650px;
+  overflow: hidden;
+}
+
+/* LEFT IMAGE */
+.newsletter-image-side {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-image-side img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* RIGHT CONTENT */
+.newsletter-content-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5rem 6rem;
+  background-color: var(--white); 
+}
+
+.newsletter-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  line-height: 1.15;
+  color: var(--text-charcoal);
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-title .italic {
+  color: var(--accent-burgundy);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.newsletter-description {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 450px;
+}
+
+.membership-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: var(--text-charcoal);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* FORM */
+.newsletter-form {
+  width: 100%;
+  max-width: 450px;
+  margin-bottom: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.input-group input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.2);
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-charcoal);
+  padding: 0.75rem 0;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+  border-color: var(--accent-burgundy);
+}
+
+.input-group input::placeholder {
+  color: #999;
+}
+
+/* SOLID BUTTON - NO HOVER, NO DISABLED */
+.subscribe-btn {
+  background-color: var(--accent-burgundy); /* Solid Burgundy */
+  color: var(--white); /* Solid White Text */
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0.8rem 1.5rem; 
+  border-radius: 50px; /* Pill shape */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%; 
+}
+
+/* Messages */
+.form-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.form-message.success { color: #2e7d32; }
+.form-message.error { color: #d32f2f; }
+
+.privacy-note {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: #999;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .newsletter-section {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .newsletter-image-side {
+    height: 400px;
+    width: 100%;
+  }
+  
+  .newsletter-content-side {
+    padding: 4rem 2rem;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .newsletter-description {
+    margin: 0 auto 2.5rem auto;
+  }
+
+  .membership-label {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .newsletter-title { font-size: 2.2rem; }
+  .newsletter-image-side { height: 300px; }
+}

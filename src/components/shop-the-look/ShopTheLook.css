@@ -1,0 +1,19 @@
+.shop-the-look-section {
+  background-color: var(--bg-ivory);
+  padding: 6rem 0;
+}
+
+.look-intro {
+  margin-bottom: 4rem;
+}
+
+.look-campaigns-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media (max-width: 768px) {
+  .look-campaigns-container { padding: 0 1.5rem; }
+  .shop-the-look-section { padding: 4rem 0; }
+}

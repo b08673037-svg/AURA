@@ -1,0 +1,103 @@
+.about-collections-section {
+  background-color: var(--white);
+  padding: 8rem 4rem;
+}
+
+.about-collections-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.collections-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.collections-header h2 {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--text-charcoal);
+  margin-bottom: 1rem;
+}
+
+.collections-header p {
+  font-family: var(--font-body);
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.about-collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* THE FIX: Remove underline from the main card link */
+.col-card-link {
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.col-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  background-color: var(--bg-sand);
+}
+
+.col-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+
+.about-collection-card:hover .col-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* Remove underline from the heading */
+.col-text h3 {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-charcoal);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+}
+
+.col-text p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+/* Style the CTA link properly without underline */
+.col-text span {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  transition: gap 0.3s ease;
+}
+
+/* Optional: Animate the arrow on hover */
+.about-collection-card:hover .col-text span {
+  gap: 0.8rem;
+}
+
+@media (max-width: 992px) {
+  .about-collections-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .about-collections-section { padding: 5rem 1.5rem; }
+}

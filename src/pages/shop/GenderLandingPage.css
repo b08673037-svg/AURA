@@ -1,0 +1,116 @@
+.gender-landing-page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4rem 5rem 4rem;
+}
+
+/* Hero */
+.gender-hero {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  padding: 4rem 0;
+}
+
+.gender-hero-content {
+  flex: 1;
+}
+
+.gender-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.gender-hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--text-charcoal);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.gender-hero-content p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.gender-hero-image {
+  flex: 1;
+  height: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.gender-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Categories */
+.gender-categories {
+  margin: 5rem 0;
+}
+
+.subcategory-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.subcategory-pill {
+  background-color: var(--white);
+  border: 1px solid rgba(37, 37, 37, 0.1);
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-charcoal);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.subcategory-pill:hover {
+  background-color: var(--accent-burgundy);
+  color: var(--white);
+  border-color: var(--accent-burgundy);
+  transform: translateY(-2px);
+}
+
+/* Products */
+.gender-products .product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.view-all-wrapper {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+@media (max-width: 992px) {
+  .gender-landing-page { padding: 0 2rem 4rem 2rem; }
+  .gender-hero { flex-direction: column; gap: 2rem; text-align: center; }
+  .gender-hero-content h1 { font-size: 3rem; }
+  .gender-hero-image { width: 100%; height: 350px; }
+  .gender-products .product-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .gender-landing-page { padding: 0 1.5rem 3rem 1.5rem; }
+  .gender-products .product-grid { grid-template-columns: 1fr; }
+}

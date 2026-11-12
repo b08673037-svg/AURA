@@ -1,0 +1,155 @@
+.collection-details-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 4rem 6rem 4rem;
+}
+
+/* Breadcrumbs */
+.collection-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.collection-breadcrumbs a {
+  color: #888;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.collection-breadcrumbs a:hover { color: var(--accent-burgundy); }
+.collection-breadcrumbs .current { color: var(--text-charcoal); font-weight: 500; }
+
+/* Hero Banner */
+.collection-hero-banner {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-sand);
+  margin-bottom: 4rem;
+  height: 400px;
+  overflow: hidden;
+}
+
+.collection-hero-text {
+  flex: 1;
+  padding: 4rem;
+}
+
+.collection-hero-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.collection-hero-text h1 {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  color: var(--text-charcoal);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.collection-hero-text p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.collection-hero-image {
+  flex: 1;
+  height: 100%;
+}
+
+.collection-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* Products Section */
+.collection-products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.1);
+  padding-bottom: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.product-count {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.collection-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Premium Empty State */
+.empty-collection-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem;
+  background-color: var(--bg-ivory);
+  border: 1px solid rgba(37, 37, 37, 0.05);
+  margin-top: 2rem;
+}
+
+.empty-collection-state h3 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--text-charcoal);
+  margin-bottom: 1rem;
+}
+
+.empty-collection-state p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #666;
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.collection-not-found-page {
+  text-align: center;
+  padding: 10rem 2rem;
+  font-family: var(--font-body);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .collection-details-wrapper { padding: 2rem 2rem 4rem 2rem; }
+  .collection-hero-banner { flex-direction: column; height: auto; }
+  .collection-hero-text { padding: 3rem 2rem; text-align: center; }
+  .collection-hero-text h1 { font-size: 2.8rem; }
+  .collection-hero-text p { margin: 0 auto; }
+  .collection-hero-image { width: 100%; height: 300px; }
+  .collection-products-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .collection-details-wrapper { padding: 1.5rem 1.5rem 3rem 1.5rem; }
+  .collection-hero-text h1 { font-size: 2.2rem; }
+  .collection-products-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .empty-collection-state { padding: 5rem 1.5rem; }
+  .empty-collection-state h3 { font-size: 2rem; }
+}

@@ -1,0 +1,104 @@
+.benefits-wrapper {
+  background-color: var(--bg-ivory); /* Matches the brand background */
+  padding: 5rem 4rem; /* Generous spacing top and bottom */
+  display: flex;
+  justify-content: center;
+}
+
+.benefits-strip {
+  max-width: 1200px;
+  width: 100%;
+  background-color: var(--white);
+  border: 1px solid rgba(37, 37, 37, 0.06);
+  border-radius: 8px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03); /* Soft floating shadow */
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  cursor: pointer;
+  flex: 1;
+  justify-content: center;
+}
+
+.benefit-icon {
+  font-size: 1.8rem;
+  color: var(--accent-burgundy);
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.benefit-item:hover .benefit-icon {
+  transform: scale(1.1);
+}
+
+.benefit-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.benefit-text strong {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  margin-bottom: 0.2rem;
+}
+
+.benefit-text span {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/* Elegant Separators */
+.benefit-item:not(:last-child) {
+  border-right: 1px solid rgba(37, 37, 37, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .benefits-strip {
+    flex-wrap: wrap;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .benefit-item {
+    flex: 0 0 45%; 
+    justify-content: flex-start;
+    border-right: none !important; 
+  }
+}
+
+@media (max-width: 768px) {
+  .benefits-wrapper {
+    padding: 3rem 1.5rem;
+  }
+  .benefits-strip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 0; 
+    border: none;
+    background-color: transparent; 
+    box-shadow: none;
+  }
+  .benefit-item {
+    flex: none;
+    width: 100%;
+    border-bottom: 1px solid rgba(37, 37, 37, 0.05);
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+  }
+  .benefit-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}

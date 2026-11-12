@@ -1,0 +1,51 @@
+:root {
+  /* Brand Colors */
+  --bg-ivory: #F8F5F0;
+  --text-charcoal: #252525;
+  --accent-burgundy: #873B4C;
+  --bg-sand: #D9CFC3;
+  --white: #FFFFFF;
+  
+  /* Typography */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  
+  /* Borders & Shadows */
+  --border-light: 1px solid rgba(37, 37, 37, 0.1);
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-ivory);
+  color: var(--text-charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg-ivory);
+  color: var(--text-charcoal);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  /* ADD THIS LINE */
+  /* overflow-x: hidden;  */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+}

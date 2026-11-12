@@ -1,0 +1,61 @@
+.contact-hero {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-ivory);
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.contact-hero-content {
+  flex: 1;
+  padding: 4rem 6rem;
+}
+
+.contact-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.contact-hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  line-height: 1.1;
+  color: var(--text-charcoal);
+  margin-bottom: 1.5rem;
+}
+
+.contact-hero-content p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+.contact-hero-image {
+  flex: 1;
+  height: 600px;
+  overflow: hidden;
+}
+
+.contact-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+@media (max-width: 992px) {
+  .contact-hero { flex-direction: column-reverse; min-height: auto; }
+  .contact-hero-content { padding: 4rem 2rem; text-align: center; }
+  .contact-hero-content h1 { font-size: 2.8rem; }
+  .contact-hero-content p { margin: 0 auto 2rem auto; }
+  .contact-hero-image { height: 400px; width: 100%; }
+}

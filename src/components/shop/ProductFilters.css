@@ -1,0 +1,126 @@
+.sidebar-filters {
+  width: 260px;
+  flex-shrink: 0;
+}
+
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.filter-header h3 {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.clear-all-btn {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--accent-burgundy);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Checkbox List */
+.filter-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.filter-checkbox input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-burgundy);
+  cursor: pointer;
+}
+
+/* Price Slider */
+.price-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.price-inputs {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.price-slider {
+  width: 100%;
+  accent-color: var(--accent-burgundy);
+}
+
+/* Size Grid */
+.size-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.size-btn {
+  background: transparent;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  padding: 0.5rem 0;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.size-btn:hover { border-color: var(--text-charcoal); }
+.size-btn.active {
+  background-color: var(--text-charcoal);
+  color: var(--white);
+  border-color: var(--text-charcoal);
+}
+
+/* Color Grid */
+.color-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.color-swatch.active {
+  border-color: var(--accent-burgundy);
+  transform: scale(1.1);
+}
+
+/* Hide Sidebar on Mobile */
+@media (max-width: 992px) {
+  .sidebar-filters {
+    display: none; /* Will be replaced by Drawer later */
+  }
+}

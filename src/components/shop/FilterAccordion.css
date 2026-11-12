@@ -1,0 +1,26 @@
+.filter-accordion {
+  border-bottom: 1px solid rgba(37, 37, 37, 0.1);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 1.5rem 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  cursor: pointer;
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.accordion-inner {
+  padding-bottom: 1.5rem;
+}

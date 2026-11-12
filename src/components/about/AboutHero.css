@@ -1,0 +1,67 @@
+.about-hero {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-ivory);
+  min-height: 650px;
+  overflow: hidden;
+}
+
+.about-hero-content {
+  flex: 1;
+  padding: 4rem 6rem;
+}
+
+.about-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--accent-burgundy);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+/* THE FIX: Reduced font size and better line height */
+.about-hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: 3.8rem !important; 
+  line-height: 1.15 !important;
+  color: var(--text-charcoal);
+  margin-bottom: 1.5rem;
+  max-width: 550px;
+}
+
+.about-hero-content p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+}
+
+.about-hero-image {
+  flex: 1;
+  height: 650px;
+  overflow: hidden;
+}
+
+.about-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+@media (max-width: 1200px) {
+  .about-hero-content h1 { font-size: 3rem !important; }
+}
+
+@media (max-width: 992px) {
+  .about-hero { flex-direction: column-reverse; min-height: auto; }
+  .about-hero-content { padding: 4rem 2rem; text-align: center; }
+  .about-hero-content h1 { font-size: 2.8rem !important; margin: 0 auto 1.5rem auto; }
+  .about-hero-content p { margin: 0 auto 2rem auto; }
+  .about-hero-image { height: 400px; width: 100%; }
+}

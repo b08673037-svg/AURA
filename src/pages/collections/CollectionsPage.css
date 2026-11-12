@@ -1,0 +1,30 @@
+.collections-page-wrapper {
+  width: 100%;
+}
+
+.collections-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 6rem 4rem;
+}
+
+.explore-section {
+  margin-bottom: 4rem;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 4rem;
+}
+
+@media (max-width: 1024px) {
+  .collections-content { padding: 4rem 2rem; }
+  .collections-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .collections-content { padding: 3rem 1.5rem; }
+  .collections-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+}

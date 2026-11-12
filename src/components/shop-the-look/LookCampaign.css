@@ -1,0 +1,104 @@
+.look-campaign {
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  margin-bottom: 8rem;
+}
+
+.look-campaign.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Image Side */
+.look-image-side {
+  flex: 1.2;
+  position: relative;
+}
+
+.look-number {
+  position: absolute;
+  top: -2.5rem;
+  left: 0;
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--bg-sand);
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+.look-image-wrapper {
+  width: 100%;
+  aspect-ratio: 4/5;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg-sand); /* Placeholder while loading */
+}
+
+.look-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.look-image-wrapper:hover img {
+  transform: scale(1.04);
+}
+
+/* Content Side */
+.look-content-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.look-campaign-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  color: var(--accent-burgundy);
+  margin-bottom: 1rem;
+}
+
+.look-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--text-charcoal);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.look-description {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  max-width: 450px;
+}
+
+.look-products-list {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+
+.shop-look-btn {
+  align-self: flex-start;
+  padding: 1.1rem 2.5rem;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .look-campaign, .look-campaign.reverse {
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 5rem;
+  }
+  .look-title { font-size: 2.2rem; }
+  .look-number { top: 1rem; left: 1rem; color: var(--white); z-index: 10; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+  .look-image-wrapper { aspect-ratio: 3/4; }
+  .shop-look-btn { width: 100%; justify-content: center; }
+}

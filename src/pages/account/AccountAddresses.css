@@ -1,0 +1,229 @@
+.account-addresses {
+  width: 100%;
+}
+
+.add-addr-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  background-color: var(--accent-burgundy);
+  color: var(--white);
+}
+
+.addresses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.address-card {
+  border: 1px solid rgba(37, 37, 37, 0.1);
+  border-radius: 4px;
+  padding: 2rem;
+  position: relative;
+}
+
+.default-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-color: var(--bg-ivory);
+  color: var(--accent-burgundy);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid rgba(135, 59, 76, 0.2);
+}
+
+.address-type {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+}
+
+.address-card h3 {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--text-charcoal);
+  margin-bottom: 0.5rem;
+}
+
+.address-card p {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #555;
+  line-height: 1.5;
+}
+
+.addr-phone {
+  margin-top: 1rem;
+  font-weight: 500;
+  color: var(--text-charcoal);
+}
+
+.address-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(37, 37, 37, 0.05);
+}
+
+.address-actions button {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.address-actions button:hover {
+  color: var(--accent-burgundy);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  background-color: var(--bg-ivory);
+  border-radius: 4px;
+}
+
+.empty-icon {
+  color: var(--accent-burgundy);
+  margin-bottom: 1rem;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+  pointer-events: none;
+}
+
+.address-modal {
+  background-color: var(--white);
+  padding: 3rem;
+  border-radius: 4px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  pointer-events: auto;
+  position: relative;
+}
+
+.address-modal h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--text-charcoal);
+  margin-bottom: 2rem;
+}
+
+.address-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.address-form .form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.address-form .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.address-form label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+}
+
+.address-form input {
+  width: 100%;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  border-radius: 4px;
+  padding: 0.8rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  outline: none;
+  background-color: var(--white);
+  transition: border-color 0.3s ease;
+}
+
+.address-form input:focus {
+  border-color: var(--accent-burgundy);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.modal-actions button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-actions .btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(37, 37, 37, 0.2);
+  color: var(--text-charcoal);
+}
+
+.modal-actions .btn-primary {
+  background-color: var(--accent-burgundy);
+  border: none;
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .addresses-grid { grid-template-columns: 1fr; }
+  .address-form .form-row { flex-direction: column; gap: 1.5rem; }
+  .address-modal { padding: 2rem 1.5rem; }
+}

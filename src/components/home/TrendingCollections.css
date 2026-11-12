@@ -1,0 +1,147 @@
+.trending-section {
+  padding-top: 2rem;
+  padding-bottom: 8rem;
+}
+
+/* The Grid Architecture */
+.trending-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: repeat(2, 300px); /* Controls the height of the rows */
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+/* The Large Card spans two rows on the left */
+.large-card {
+  grid-row: span 2;
+}
+
+/* The Small Cards take up the right side */
+.small-card {
+  grid-row: span 1;
+}
+
+/* Card Basics */
+.trending-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px; /* Very subtle rounding for luxury feel */
+}
+
+.trending-img-wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.trending-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Elegant Gradient Overlay */
+.trending-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2.5rem;
+  color: var(--white);
+  transition: background 0.4s ease;
+}
+
+.trending-card:hover .trending-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.1) 60%);
+}
+
+/* Text Styling */
+.trending-text {
+  transform: translateY(10px);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trending-card:hover .trending-text {
+  transform: translateY(0);
+}
+
+.trending-subtitle {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.trending-text h3 {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+/* Large Card Text needs to be slightly bigger */
+.large-card .trending-text h3 {
+  font-size: 2.8rem;
+}
+
+/* Arrow Icon Interaction */
+.trending-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--white);
+  color: var(--text-charcoal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.trending-card:hover .trending-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.trending-card:hover .trending-arrow:hover {
+  background-color: var(--accent-burgundy);
+  color: var(--white);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .trending-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .large-card, .small-card {
+    grid-row: auto;
+    height: 400px; /* Fixed height for tablets/mobile */
+  }
+  
+  .large-card .trending-text h3 {
+    font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .trending-overlay {
+    padding: 1.5rem;
+  }
+  .trending-text h3 {
+    font-size: 1.8rem !important;
+  }
+  .trending-arrow {
+    display: none; /* Hide arrow on mobile for clean look */
+  }
+}

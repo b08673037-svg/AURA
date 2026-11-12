@@ -1,0 +1,35 @@
+.product-accordion {
+  border-bottom: 1px solid rgba(37, 37, 37, 0.1);
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 0;
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-charcoal);
+  cursor: pointer;
+}
+
+.accordion-body {
+  overflow: hidden;
+}
+
+.accordion-content {
+  padding-bottom: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.7;
+}
+
+.accordion-content ul {
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}

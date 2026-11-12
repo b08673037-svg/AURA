@@ -1,0 +1,37 @@
+/* 
+  We import the CategoryListingPage.css so the View All page 
+  inherits all the exact same sidebar, grid, and toolbar styles.
+*/
+@import './CategoryListingPage.css';
+
+/* 
+  Any specific overrides for the View All page can go here.
+  For example, if you want the hero header to be slightly different.
+*/
+
+.view-all-hero {
+  background-color: var(--bg-ivory);
+  padding: 4rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.view-all-hero h1 {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--text-charcoal);
+  margin-bottom: 1rem;
+}
+
+.view-all-hero p {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .view-all-hero { padding: 3rem 1.5rem; }
+  .view-all-hero h1 { font-size: 2.5rem; }
+}
