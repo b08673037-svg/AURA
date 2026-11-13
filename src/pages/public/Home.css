@@ -9,25 +9,25 @@
   padding: 5rem 4rem;
 }
 
+/* --- NEW ARRIVALS SECTION --- */
 .arrivals-layout {
   display: flex;
-  gap: 2.5rem; /* Reduced gap */
+  gap: 2.5rem;
   align-items: center;
 }
 
-/* Shrink the left intro block significantly */
 .arrivals-intro {
-  flex: 0 0 240px; 
+  flex: 0 0 300px; 
 }
 
-/* Give the grid the rest of the space */
 .arrivals-grid {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr)); 
-  gap: 1rem; /* Tighter gap */
+  gap: 1.5rem; 
 }
 
+/* --- COLLECTION BANNERS --- */
 .collection-banners-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -35,14 +35,57 @@
   padding-top: 0;
 }
 
-@media (max-width: 1200px) {
-  .arrivals-layout { flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .arrivals-intro { flex: none; width: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
-  .arrivals-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+/* --- TABLET RESPONSIVENESS (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .section-container {
+    padding: 4rem 2rem;
+  }
+  
+  .arrivals-layout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  
+  .arrivals-intro {
+    flex: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .arrivals-grid {
+    grid-template-columns: repeat(2, 1fr);
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .collection-banners-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
+/* --- MOBILE RESPONSIVENESS (max-width: 768px) --- */
 @media (max-width: 768px) {
-  .section-container { padding: 3rem 1.5rem; }
-  .arrivals-intro { flex-direction: column; align-items: flex-start; gap: 1rem; }
-  .arrivals-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .section-container {
+    padding: 3rem 1.5rem;
+  }
+
+  .arrivals-grid {
+    /* Keeps 2 columns on mobile for a clean boutique look */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1rem;
+  }
+}
+
+/* --- SMALL MOBILE (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .arrivals-grid {
+    /* Stacks to 1 column on very small phones */
+    grid-template-columns: 1fr; 
+  }
 }

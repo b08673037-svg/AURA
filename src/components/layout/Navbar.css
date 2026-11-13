@@ -240,3 +240,147 @@
   .expanded-search-form { padding-bottom: 0.5rem; }
   .expanded-search-form input { font-size: 1.1rem; }
 }
+
+
+/* ... KEEP YOUR EXISTING DESKTOP NAVBAR STYLES ... */
+
+/* ADD THESE NEW STYLES AT THE BOTTOM */
+
+/* Hide mobile elements on desktop */
+.mobile-menu-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-charcoal);
+  padding: 0;
+  align-items: center;
+}
+
+.mobile-menu-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 85%;
+  max-width: 350px;
+  background: var(--white);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  z-index: 9999;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(37, 37, 37, 0.1);
+}
+
+.mobile-menu-close {
+  background: transparent;
+  border: none;
+  color: var(--text-charcoal);
+  cursor: pointer;
+  padding: 0;
+}
+
+.mobile-menu-links {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--text-charcoal);
+  padding: 0.5rem 0;
+  transition: color 0.2s;
+}
+
+.mobile-nav-link:hover,
+.mobile-nav-link.active {
+  color: var(--accent-burgundy);
+}
+
+.mobile-menu-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(37, 37, 37, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--bg-ivory);
+}
+
+.mobile-menu-footer .mobile-nav-link {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+@media (max-width: 992px) {
+  .navbar-container {
+    padding: 1rem 1.5rem;
+  }
+
+  /* Hide desktop links */
+  .navbar-links {
+    display: none;
+  }
+
+  /* Show hamburger menu */
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  /* Hide user/wishlist icons in the top bar (they are now in the drawer) */
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .navbar-logo {
+    font-size: 1.6rem;
+    margin-left: 0.5rem;
+  }
+  
+  .navbar-container {
+    justify-content: space-between;
+  }
+  
+  .navbar-actions {
+    margin-left: auto;
+  }
+  
+  /* Adjust search dropdown for mobile */
+  .search-dropdown-inner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .expanded-search-form input {
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+

@@ -6,6 +6,7 @@ import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from './context/WishlistContext';
 import { AuthProvider } from './context/AuthContext';
 
+
 // Layout Components
 import AnnouncementBar from './components/layout/AnnouncementBar';
 import Navbar from './components/layout/Navbar';
@@ -73,6 +74,7 @@ import AdminMessages from './pages/admin/AdminMessages';
 // Collections Pages
 import CollectionsPage from './pages/collections/CollectionsPage';
 import CollectionDetailsPage from './pages/collections/CollectionDetailsPage';
+// import Abdullah from './pages/abdullah';
 
 function App() {
   return (
@@ -109,6 +111,7 @@ function App() {
                   <Route path="lookbooks" element={<AdminLookbook />} />
                   <Route path="orders" element={<AdminOrders />} />
                   <Route path="inventory" element={<AdminInventory />} />
+                  {/* <Route path="abdullah" element={<Abdullah/>} /> */}
                   <Route path="customers" element={<AdminCustomers />} />
                   <Route path="messages" element={<AdminMessages />} />
                   <Route path="marketing" element={<AdminMarketing />} />

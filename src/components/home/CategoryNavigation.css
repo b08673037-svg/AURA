@@ -1,22 +1,18 @@
 .category-nav-wrapper {
   background-color: var(--white);
   border-bottom: 1px solid rgba(37, 37, 37, 0.08);
-  position: relative;
-  z-index: 10;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
   width: 100%;
 }
 
 .category-nav-container {
   display: flex;
   justify-content: space-between;
-  align-items: stretch; /* Ensures wrappers stretch to full height for the outlines */
+  align-items: stretch;
   max-width: 1300px;
   margin: 0 auto;
   padding: 0 2rem;
 }
 
-/* The wrapper for each category */
 .category-item-wrapper {
   flex: 1;
   display: flex;
@@ -24,15 +20,14 @@
   position: relative;
 }
 
-/* The Vertical Outlines (Separators) */
 .category-item-wrapper:not(:last-child)::after {
   content: '';
   position: absolute;
   right: 0;
-  top: 25%; /* Pushes the line down slightly */
-  height: 50%; /* Makes the line 50% of the height */
+  top: 25%;
+  height: 50%;
   width: 1px;
-  background-color: rgba(37, 37, 37, 0.1); /* Subtle grey line */
+  background-color: rgba(37, 37, 37, 0.1);
 }
 
 .category-item {
@@ -45,51 +40,31 @@
   color: var(--text-charcoal);
   padding: 1.5rem 1rem;
   width: 100%;
-  /* No transitions or hover effects */
 }
 
-.category-icon {
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: var(--text-charcoal); /* Static color */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.category-name {
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-align: center;
-  color: var(--text-charcoal); /* Static color */
-  white-space: nowrap; 
-}
-
-/* Mobile - Horizontal Scroll */
+/* --- MOBILE (max-width: 992px) --- */
 @media (max-width: 992px) {
   .category-nav-container {
     overflow-x: auto;
     justify-content: flex-start;
     padding: 0;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none; /* Hide scrollbar Firefox */
   }
   
   .category-nav-container::-webkit-scrollbar { 
-    display: none; /* Chrome/Safari */
+    display: none; /* Hide scrollbar Chrome/Safari */
   }
 
   .category-item-wrapper {
     flex: none;
-    min-width: 140px; 
+    min-width: 120px; /* Adjust this to fit your icons */
   }
   
-  /* Hide the vertical lines on mobile since it scrolls */
   .category-item-wrapper:not(:last-child)::after {
     display: none; 
   }
   
   .category-item {
-    padding: 1.5rem 1rem;
+    padding: 1.2rem 1rem;
   }
 }
