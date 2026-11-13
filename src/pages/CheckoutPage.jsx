@@ -40,7 +40,6 @@ const CheckoutPage = () => {
     setIsProcessing(true);
 
     try {
-      // 1. Build the address object
       const addressData = {
         id: `addr-${Date.now()}`,
         fullName: `${formData.firstName} ${formData.lastName}`.trim(),
@@ -54,10 +53,8 @@ const CheckoutPage = () => {
         isDefault: true
       };
       
-      // 2. Save the address to the user's profile
       await saveAddress(currentUser.uid, addressData);
 
-      // 3. Build the order object
       const orderData = {
         customerInfo: {
           firstName: formData.firstName,
@@ -79,7 +76,8 @@ const CheckoutPage = () => {
           quantity: item.quantity,
           size: item.selectedSize,
           color: item.selectedColor,
-          image: item.image
+          image: item.image,
+          category: item.category // Ensure category is passed
         })),
         subtotal,
         discount: discountAmount || 0,
@@ -90,7 +88,6 @@ const CheckoutPage = () => {
         notes: formData.notes || ""
       };
 
-      // 4. Create the order
       const result = await createOrder(currentUser.uid, orderData);
       
       if (result.success) {
@@ -110,12 +107,6 @@ const CheckoutPage = () => {
     if (clearCart) clearCart(); 
     navigate('/account/orders');
   };
-
-  // Inline styles for the layout
-  const layoutStyle = { display: 'flex', alignItems: 'flex-start', gap: '4rem', width: '100%' };
-  const leftColStyle = { flex: '1 1 60%', minWidth: '0' };
-  const rightColStyle = { flex: '0 0 400px', width: '400px', position: 'sticky', top: '120px' };
-  const summaryCardStyle = { backgroundColor: '#F8F5F0', padding: '2.5rem', borderRadius: '4px', width: '100%', boxSizing: 'border-box' };
 
   if (cartItems.length === 0 && !isSuccessModalOpen) {
     return (
@@ -144,8 +135,9 @@ const CheckoutPage = () => {
         <div className="progress-step"><span>4</span> Confirmation</div>
       </div>
 
-      <div style={layoutStyle}>
-        <div style={leftColStyle}>
+      {/* REPLACED INLINE STYLES WITH CSS CLASSES */}
+      <div className="checkout-content">
+        <div className="checkout-forms">
           <div className="checkout-intro">
             <h1>Almost Yours.</h1>
             <p>Complete your details below and we'll take care of the rest.</p>
@@ -187,18 +179,11 @@ const CheckoutPage = () => {
               </div>
             </section>
 
-            {/* RESTORED: PAYMENT METHOD SECTION */}
             <section className="checkout-section">
               <h2>Payment Method</h2>
               <div className="payment-options">
                 <label className={`payment-option ${formData.paymentMethod === 'cod' ? 'selected' : ''}`}>
-                  <input 
-                    type="radio" 
-                    name="paymentMethod" 
-                    value="cod" 
-                    checked={formData.paymentMethod === 'cod'} 
-                    onChange={handleChange} 
-                  />
+                  <input type="radio" name="paymentMethod" value="cod" checked={formData.paymentMethod === 'cod'} onChange={handleChange} />
                   <div>
                     <strong>Cash on Delivery</strong>
                     <span>Pay when your order arrives</span>
@@ -209,42 +194,42 @@ const CheckoutPage = () => {
           </form>
         </div>
 
-        <div style={rightColStyle}>
-          <div style={summaryCardStyle}>
-            <h2 style={{ fontFamily: 'Playfair Display, serif', fontSize: '1.8rem', marginBottom: '2rem' }}>Order Summary</h2>
+        <div className="checkout-summary">
+          <div className="summary-card">
+            <h2>Order Summary</h2>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2rem', maxHeight: '320px', overflowY: 'auto' }}>
+            <div className="summary-items">
               {cartItems.map(item => (
-                <div key={`${item.id}-${item.selectedSize}`} style={{ display: 'flex', alignItems: 'center', gap: '1rem', width: '100%' }}>
-                  <img src={item.image} alt={item.name} style={{ width: '50px', height: '65px', objectFit: 'cover', borderRadius: '2px', flexShrink: 0 }} />
-                  <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.85rem', fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.name}</span>
-                    <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.7rem', color: '#888' }}>{item.selectedSize} × {item.quantity}</span>
+                <div key={`${item.id}-${item.selectedSize}`} className="summary-item">
+                  <img src={item.image} alt={item.name} />
+                  <div>
+                    <span className="item-name">{item.name}</span>
+                    <span className="item-meta">{item.selectedSize} × {item.quantity}</span>
                   </div>
-                  <span style={{ fontFamily: 'DM Sans, sans-serif', fontSize: '0.85rem', fontWeight: 600 }}>{formatPrice(item.price * item.quantity)}</span>
+                  <span className="item-price">{formatPrice(item.price * item.quantity)}</span>
                 </div>
               ))}
             </div>
 
-            <div style={{ height: '1px', backgroundColor: 'rgba(37, 37, 37, 0.1)', margin: '1.5rem 0' }}></div>
+            <div className="summary-divider"></div>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'DM Sans, sans-serif', fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+            <div className="summary-row">
               <span>Subtotal</span><span>{formatPrice(subtotal)}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'DM Sans, sans-serif', fontSize: '0.9rem', color: '#555', marginBottom: '1rem' }}>
+            <div className="summary-row">
               <span>Shipping</span><span>{subtotal > 5000 ? "Free" : "PKR 250"}</span>
             </div>
             
-            <div style={{ height: '1px', backgroundColor: 'rgba(37, 37, 37, 0.1)', margin: '1.5rem 0' }}></div>
+            <div className="summary-divider"></div>
             
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'DM Sans, sans-serif', fontSize: '1.2rem', fontWeight: 600, color: '#252525', marginBottom: '2rem' }}>
+            <div className="summary-row total">
               <span>Total</span><span>{formatPrice(finalTotal)}</span>
             </div>
 
             <button 
               type="submit" 
               form="checkout-form" 
-              style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '0.5rem', padding: '1.1rem', borderRadius: '4px', fontSize: '0.95rem', fontFamily: 'DM Sans, sans-serif', fontWeight: 600, cursor: 'pointer', border: 'none', backgroundColor: '#873B4C', color: 'white' }}
+              className="btn-primary place-order-btn"
               disabled={isProcessing}
             >
               {isProcessing ? "Processing..." : "Place My Order"} <FiLock />
